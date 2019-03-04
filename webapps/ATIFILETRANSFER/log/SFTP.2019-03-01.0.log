@@ -1,0 +1,21 @@
+2019-03-01 15:59:56,704 INFO  c.a.a.AtifiletransferApplication - Starting AtifiletransferApplication on ASD-Ismail-M with PID 1128 (D:\Kerja\ATIFILETRANSFER\target\classes started by ahmad.wicaksono in D:\Kerja\ATIFILETRANSFER)
+2019-03-01 15:59:56,722 INFO  c.a.a.AtifiletransferApplication - No active profile set, falling back to default profiles: default
+2019-03-01 16:00:03,185 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-01 16:00:03,187 INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.27
+2019-03-01 16:00:03,893 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring embedded WebApplicationContext
+2019-03-01 16:00:13,636 INFO  c.a.a.AtifiletransferApplication - Started AtifiletransferApplication in 18.142 seconds (JVM running for 26.201)
+2019-03-01 16:00:21,429 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-03-01 16:02:42,669 INFO  c.a.a.AtifiletransferApplication - Starting AtifiletransferApplication on ASD-Ismail-M with PID 12632 (D:\Kerja\ATIFILETRANSFER\target\classes started by ahmad.wicaksono in D:\Kerja\ATIFILETRANSFER)
+2019-03-01 16:02:42,673 INFO  c.a.a.AtifiletransferApplication - No active profile set, falling back to default profiles: default
+2019-03-01 16:02:44,886 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-01 16:02:44,889 INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.27
+2019-03-01 16:02:45,032 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring embedded WebApplicationContext
+2019-03-01 16:02:49,770 INFO  c.a.a.AtifiletransferApplication - Started AtifiletransferApplication in 7.43 seconds (JVM running for 8.743)
+2019-03-01 16:02:50,862 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-03-01 16:27:34,290 INFO  c.a.a.AtifiletransferApplication - Starting AtifiletransferApplication on ASD-Ismail-M with PID 5404 (D:\Kerja\ATIFILETRANSFER\target\classes started by ahmad.wicaksono in D:\Kerja\ATIFILETRANSFER)
+2019-03-01 16:27:34,394 INFO  c.a.a.AtifiletransferApplication - No active profile set, falling back to default profiles: default
+2019-03-01 16:27:36,437 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2019-03-01 16:27:36,439 INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.27
+2019-03-01 16:27:37,151 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring embedded WebApplicationContext
+2019-03-01 16:27:41,956 INFO  c.a.a.AtifiletransferApplication - Started AtifiletransferApplication in 7.883 seconds (JVM running for 18.039)
+2019-03-01 16:27:42,764 INFO  o.a.c.c.C.[.[.[/ATIFILETRANSFER] - Initializing Spring FrameworkServlet 'dispatcherServlet'

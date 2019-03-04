@@ -1,0 +1,72 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+
+<title th:text="${apps  != null ? apps  : '' }"></title>
+
+<link rel="icon" type="image/x-icon" th:href="@{/assets/img/sftp.ico}" />
+
+<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css" />
+<link th:href="@{/assets/login/css/login.css}" rel="stylesheet" />
+<link th:href="@{/assets/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
+<link th:href="@{/assets/login/css/css.css}" rel="stylesheet"/>
+
+<script th:src="@{/assets/vendor/jquery/jquery.js}"></script>
+
+</head>
+
+<body style=" visibility: hidden;" id="hideAll">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3">
+				<div id="iosBlurBg">
+					<div id="whiteBg"></div>
+				</div>
+				<div id="bottomEnter"></div>
+				<div id="bottomBlurBg"></div>
+				<form action="login" method="post">
+					<div class="loginForm">
+						<div class="title">
+							<p>
+								LOG INTO<br /> <span th:text="${apps  != null ? apps  : '' }"></span>
+							</p>
+							<hr />
+							<hr class="short" />
+						</div>
+						<div class="col-3">
+							<input class="effect-2" type="text" name="username"
+								placeholder="Username" autofocus="autofocus" /> <span
+								class="focus-border"></span> <input class="effect-2"
+								type="password" name="password" placeholder="Password" /> <span
+								class="focus-border"></span>
+						</div>
+						<div class="col-3" th:if="${param.error}">
+							<h5 class="panel-title" th:text="#{message.error.login}" style="color : red; width : 50%; word-break : break-all"></h5>
+						</div>
+					</div>
+					<div class="enterButton">
+						<i class="fa fa-lock fa-2x text-white"></i><br />
+						<button class="enterText text-white">Login</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/login/jquery/jquery-1.11.1.min.js}"></script>
+	<script>
+		$(document).ready(function() {
+			delay();
+		});
+		
+		function delay() {
+			var secs = 1000;
+			setTimeout('initFadeIn()', secs);
+		}
+			 
+		function initFadeIn() {
+			$("#hideAll").css("visibility","visible");
+			$("#hideAll").css("display","node");
+		}
+	</script>
+</body>
+</html>

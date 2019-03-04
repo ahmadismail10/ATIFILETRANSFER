@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    
+    <object codebase="https://www.activexperts.com/files/network-component/3.1/AxNetwork32.cab" 
+           classid="CLSID:B52B14BA-244B-4006-86E0-2923CB69D881" ></object>
+
+    <title th:text="${parameter == null ? 'Form Parameter' : status == 'view' ? 'View Parameter':'Form Edit Parameter'}"></title>
+	<link rel="icon" type="image/x-icon" th:href="@{/assets/img/sftp.ico}"/>
+	
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/assets/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link th:href="@{/assets/dist/css/sb-admin-2.css}" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/assets/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div th:replace="navbar :: common-navbar"></div>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" th:text="${parameter == null ? 'Form Parameter' : status == 'view' ? 'View Parameter':'Form Edit Parameter'}"></h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+            	<ol class="breadcrumb">
+					<li><a href="/atifiletransfer/company/list"><span>Company</span></a></li>
+					<li><a th:text="${parameter == null ? 'Company Parameter Form' : status == 'view' ? 'Company Parameter View':'Company Parameter Edit'}"><span></span></a></li>
+				</ol>
+			</div>
+            <!-- /.row -->
+            <div class="row">
+            	<div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Form Company Parameter
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#get" data-toggle="tab">Get Parameter</a>
+                                </li>
+                                <li><a href="#put" data-toggle="tab">Put Parameter</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <form method="post"	th:object="${formCompanyParameter}" action="save" id="formparameter">
+                            	<div class="tab-content">
+                            		<div class="tab-pane fade in active" id="get">
+                                    	<h4>Company Parameter Get</h4>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Companies Protocol</label>
+                                            <div class="radio">
+                                            	<label>
+                                            		<input type="radio" name="companiesParameter[0].companyParameterProtocol" id="optionsRadios1" value="SFTP" th:attr="checked = ${parameter == null ? 'false': parameter.companyParameterProtocol.name() == 'SFTP' ? 'checked':'false'}"/>SFTP
+                                            	</label>
+                                            </div>
+                                            <div class="radio">
+                                            	<label>
+                                            		<input type="radio" name="companiesParameter[0].companyParameterProtocol" id="optionsRadios2" value="FTP" th:attr="checked = ${parameter == null ? 'false': parameter.companyParameterProtocol.name() == 'FTP' ? 'checked':'false'}"/>FTP
+                                            	</label>
+                                            </div>
+                                            <small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterProtocol')}" th:errors="*{companiesParameter[0].companyParameterProtocol}" id="companyParameterProtocol" class="text-danger"></small>
+                                        </div>    
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[0].company.companyId" th:attr="value = ${companyId !=null ? companyId : ''}"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[0].companyParameterType" value="Get"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[0].companyParameterId" th:attr="value = ${getparam !=null ? getparam.companyParameterId : '' }"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[0].companyParameterFileExtension" value="*.txt"/>
+                                    	</div>
+                                    	<div class="form-group required">
+                                    		<label class="control-label">IP</label>
+                                        	<input id="ipget" class="form-control" name="companiesParameter[0].companyParameterIp" placeholder="Enter Ip" th:attr="value = ${getparam !=null ? getparam.companyParameterIp : '' }" required="required"/>
+                                        	<small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterIp')}" th:errors="*{companiesParameter[0].companyParameterIp}" id="companyParameterIp" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Port</label>
+                                        	<input id="portget" class="form-control" name="companiesParameter[0].companyParameterPort" placeholder="Enter Port" th:attr="value = ${getparam !=null ? getparam.companyParameterPort : '' }" onKeyPress="return numericOnly(event)" required="required"/>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Username</label>
+                                        	<input id="usernameget" class="form-control" name="companiesParameter[0].companyParameterUsername" placeholder="Enter Username" th:attr="value = ${getparam !=null ? getparam.companyParameterUsername : '' }" required="required"/>
+                                        	<small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterUsername')}" th:errors="*{companiesParameter[0].companyParameterUsername}" id="companyParameterUsername" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Password</label>
+                                        	<input id="passwordget" type="password" class="form-control" name="companiesParameter[0].companyParameterPassword" placeholder="Enter Password" th:attr="value = ${getparam !=null ? getparam.companyParameterPassword : ''  }" required="required"/>
+                                        	<small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterPassword')}" th:errors="*{companiesParameter[0].companyParameterPassword}" id="companyParameterPassword" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Remote Directory</label>
+                                        	<input class="form-control" name="companiesParameter[0].companyParameterRemoteDirectory" placeholder="Enter Remote Directory" th:attr="value = ${getparam !=null ? getparam.companyParameterRemoteDirectory : '' }"/>
+                                        	<small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterRemoteDirectory')}" th:errors="*{companiesParameter[0].companyParameterRemoteDirectory}" id="companyParameterRemoteDirectory" class="text-danger"></small>
+                                    	</div>                                    
+                                    	<div class="form-group">
+                                        	<label>Filename Contain</label>
+                                        	<input class="form-control" name="companiesParameter[0].companyParameterPrefix" th:attr="value = ${getparam !=null ? getparam.companyParameterPrefix : '' }" placeholder="Enter Filename"/>
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[0].companyParameterPrefix')}" th:errors="*{companiesParameter[0].companyParameterPrefix}" id="companyParameterPrefix" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<label>Description</label>
+                                        	<textarea class="form-control" name="companiesParameter[0].companyParameterDescription" th:text="${getparam !=null ? getparam.companyParameterDescription : '' }" placeholder="Enter Description"></textarea>
+                                		</div>
+                                		<button type="button" id="cekbtn1" class="btn btn-default">Check Connection</button>
+                                	</div>    
+                                	<div class="tab-pane fade" id="put">
+                                    	<h4>Company Parameter Put</h4>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Companies Protocol</label>
+                                            <div class="radio">
+                                            	<label>
+                                            		<input type="radio" name="companiesParameter[1].companyParameterProtocol" id="optionsRadios3" value="SFTP" th:attr="checked = ${parameter == null ? 'false': parameter.companyParameterProtocol.name() == 'SFTP' ? 'checked':'false'}"/>SFTP
+                                            	</label>
+                                            </div>
+                                            <div class="radio">
+                                            	<label>
+                                            		<input type="radio" name="companiesParameter[1].companyParameterProtocol" id="optionsRadios4" value="FTP" th:attr="checked = ${parameter == null ? 'false': parameter.companyParameterProtocol.name() == 'FTP' ? 'checked':'false'}"/>FTP
+                                            	</label>
+                                            </div>
+                                            <small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterProtocol')}" th:errors="*{companiesParamater[1].companyParameterProtocol}" id="companyParameterProtocol" class="text-danger"></small>
+                                        </div>    
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[1].company.companyId" th:attr="value = ${companyId !=null ? companyId : '' }"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[1].companyParameterType" value="Put"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[1].companyParameterId" th:attr="value = ${putparam !=null ? putparam.companyParameterId : '' }"/>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<input class="form-control" type="hidden" name="companiesParameter[1].companyParameterFileExtension" value="*.txt"/>
+                                    	</div>
+                                    	<div class="form-group required">
+                                    		<label class="control-label">IP</label>
+                                        	<input id="ipput" class="form-control" name="companiesParameter[1].companyParameterIp" placeholder="Enter Ip" th:attr="value = ${putparam !=null ? putparam.companyParameterIp : '' }" required="required"/>
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterIp')}" th:errors="*{companiesParameter[1].companyParameterIp}" id="companyParameterIp" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Port</label>
+                                        	<input id="portput" class="form-control" name="companiesParameter[1].companyParameterPort" placeholder="Enter Port" th:attr="value = ${putparam !=null ? putparam.companyParameterPort : '' }" onKeyPress="return numericOnly(event)" required="required"/>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Username</label>
+                                        	<input id="usernameput" class="form-control" name="companiesParameter[1].companyParameterUsername" placeholder="Enter Username" th:attr="value = ${putparam !=null ? putparam.companyParameterUsername : '' }" required="required"/>
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterUsername')}" th:errors="*{companiesParameter[1].companyParameterUsername}" id="companyParameterUsername" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Password</label>
+                                        	<input id="passwordput" type="password" class="form-control" name="companiesParameter[1].companyParameterPassword" placeholder="Enter Password" th:attr="value = ${putparam !=null ? putparam.companyParameterPassword : '' }" required="required"/>
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterPassword')}" th:errors="*{companiesParameter[1].companyParameterPassword}" id="companyParameterPassword" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group required">
+                                        	<label class="control-label">Remote Directory</label>
+                                        	<input class="form-control" name="companiesParameter[1].companyParameterRemoteDirectory" placeholder="Enter Remote Directory" th:attr="value = ${putparam !=null ? putparam.companyParameterRemoteDirectory : '' }" />
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterRemoteDirectory')}" th:errors="*{companiesParameter[1].companyParameterRemoteDirectory}" id="companyParameterRemoteDirectory" class="text-danger"></small>
+                                    	</div>                                    
+                                    	<div class="form-group">
+                                        	<label>Filename Contain</label>
+                                        	<input class="form-control" name="companiesParameter[1].companyParameterPrefix" th:attr="value = ${putparam !=null ? putparam.companyParameterPrefix : '' }" placeholder="Enter Filename"/>
+                                    		<small th:if="${#fields.hasErrors('companiesParameter[1].companyParameterPrefix')}" th:errors="*{companiesParameter[1].companyParameterPrefix}" id="companyParameterPrefix" class="text-danger"></small>
+                                    	</div>
+                                    	<div class="form-group">
+                                    		<label>Description</label>
+                                        	<textarea class="form-control" name="companiesParameter[1].companyParameterDescription" th:text="${putparam !=null ? putparam.companyParameterDescription : '' }" placeholder="Enter Description"></textarea>
+                                		</div>
+                                		<button type="button" id="cekbtn2" class="btn btn-default">Check Connection</button>
+                                		<button type="submit" id="submitbutton" class="btn btn-default">Submit</button>
+                                   		<a href="/ATIFILETRANSFER/company/list">
+                                   			<button type="button"  class="btn btn-default">Cancel</button>
+                                   		</a>
+                                	</div>                                
+                            	</div>
+                            </form>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script th:src="@{/assets/vendor/metisMenu/metisMenu.min.js}"></script>
+    
+    <script th:src="@{/assets/vendor/validation/formvalidation.js}"></script>
+    
+    <script th:src="@{/assets/vendor/bootstrap/js/bootstrap-toggle.min.js}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script th:src="@{/assets/dist/js/sb-admin-2.js}"></script>
+    <script type="text/javascript">
+    
+    	var objFtpServer = new ActiveXObject("AxNetwork.FtpServer");
+    	var objSftpServer = new ActiveXObject ( "AxNetwork.Sftp" );
+    	var btncheck1 = document.getElementById('cekbtn1');
+    	var protocolget = document.getElementByName('companiesParameter[0].companyParameterProtocol');
+    	var ipget = document.getElementById('ipget');
+    	var portget = document.getElementById('portget');
+    	var userget = document.getElementById('usernameget');
+    	var passget = document.getElementById('passwordget');
+    	
+    	var btncheck2 = document.getElementById('cekbtn2');
+    	var protocolput = document.getElementByName('companiesParameter[1].companyParameterProtocol');
+    	var ipput = document.getElementById('ipput');
+    	var portput = document.getElementById('portput');
+    	var userput = document.getElementById('usernameput');
+    	var passput = document.getElementById('passwordput');
+    	
+    	btncheck1.addEventListener('click', function()
+    			{
+    				if protocolget.value == "SFTP"
+    				{
+    						objSftpServer.HostPort = portget;
+    						boolean cek = objSftpServer.Connect(ipget, userget, passget);
+    						objSftpServer.Disconnect();
+    						document.write(cek);
+    				}
+    				else
+    				{
+    					objFtpServer.HostPort = portput;
+						boolean cek = objFtpServer.Connect(ipput, userput, passput);
+						objFtpServer.Disconnect();
+						document.write(cek);
+    				}
+    			});
+    	
+    	btncheck2.addEventListener('click', function()
+    			{
+    				if protocolget.value == "SFTP"
+    				{
+    						objSftpServer.HostPort = portput;
+    						boolean cek = objSftpServer.Connect(ipput, userput, passput);
+    						objSftpServer.Disconnect();
+    						document.write(cek);
+    				}
+    				else
+    				{
+    					objFtpServer.HostPort = portput;
+						boolean cek = objFtpServer.Connect(ipput, userput, passput);
+						objFtpServer.Disconnect();
+						document.write(cek);
+    				}
+    			});
+    	
+    </script>
+    <script>
+   		$('#submitbutton').click(function () {
+    	   $(':required:invalid', '#formparameter').each(function () {
+    	      var id = $('.tab-pane').find(':required:invalid').closest('.tab-pane').attr('id');
+
+    	      $('.nav a[href="#' + id + '"]').tab('show');
+    	   });
+    	});
+    </script>
+</body>
+</html>
